@@ -1,7 +1,10 @@
+import BannerPage from "./components/Banner";
 
 
 export default function Home() {
   return (
-   <div>This is home page</div>
+   <div>
+    <BannerPage></BannerPage>
+   </div>
   );
 }

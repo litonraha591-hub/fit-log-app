@@ -1,5 +1,6 @@
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
             <h1 className='font-[var(--font-oswald)]  font-bold text-white'>FITLOG</h1>
         </div>
         <div className='flex justify-center gap-2'>
-            <h1 className='text-[#C2F800]'>Workouts</h1>
+           <Link href='/workout-library' className='text-white'> Workouts</Link>
             <h1 className='text-white'>My Plan</h1>
         </div>
         <div className='flex justify-end gap-2 '>

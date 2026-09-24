@@ -77,7 +77,7 @@ const WorkOutPage = async ({ params }: IWorkOutPageProps) => {
         </div>
         <div className="my-5 flex gap-4">
         <AddToTodaysPlan workout={workout}></AddToTodaysPlan>
-          <SavedForLater></SavedForLater>
+          <SavedForLater workout={workout}></SavedForLater>
         </div>
       </div>
     </div>

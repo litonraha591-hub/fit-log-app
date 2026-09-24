@@ -1,14 +1,13 @@
 "use client";
 import { WorkContext } from "@/context/WorkContext";
 import { IWorkout } from "@/types/workout.types";
-import { discoverValidationDepths } from "next/dist/server/app-render/instant-validation/instant-validation";
-import Image from "next/image";
+
 import Link from "next/link";
 import React, { useContext } from "react";
 import SavedTodaysPlan from "../shared/SavedTodaysPlan";
 
 const MyPlanPage = () => {
-  const { savedWorkout } = useContext(WorkContext);
+  const { savedWorkout, saveLaterWorkout } = useContext(WorkContext);
   return (
     <div className="space-y-2">
       <div>
@@ -20,21 +19,24 @@ const MyPlanPage = () => {
         <p>Minutes</p>
         <p>Calories</p>
       </div>
-      <div className="grid grid-cols-2 justify-between">
-        <div role="tablist" className="tabs tabs-box">
-          <a role="tab" className="tab">
-            Saved plan
-          </a>
-          <a role="tab" className="tab tab-active">
-            Tab 2
-          </a>
-        </div>
-        <p>Sort by</p>
-      </div>
-      <div className="text-center m-3">
-        {savedWorkout.length > 0 ? (
+      {/* name of each tab group should be unique */}
+      {/* name of each tab group should be unique */}
+      <div className="tabs tabs-border">
+        <input
+          type="radio"
+          name="my_tabs_2"
+          className="tab"
+          aria-label="Today`s Plan"
+        />
+        <div className="tab-content border-base-300 bg-base-100 p-10">
+         {savedWorkout.length > 0 ? (
           savedWorkout.map((workout: IWorkout) => {
-            return <SavedTodaysPlan key={workout.id} workout={workout}></SavedTodaysPlan>
+            return (
+              <SavedTodaysPlan
+                key={workout.id}
+                workout={workout}
+              ></SavedTodaysPlan>
+            );
           })
         ) : (
           <div>
@@ -42,8 +44,40 @@ const MyPlanPage = () => {
             <p>Browse the library and add a lift to get today moving.</p>
           </div>
         )}
+        </div>
 
-        <Link href="/workout-details">Go to Workouts</Link>
+        <input
+          type="radio"
+          name="my_tabs_2"
+          className="tab"
+          aria-label="Saved"
+          defaultChecked
+        />
+        <div className="tab-content border-base-300 bg-base-100 p-10 ">
+         {saveLaterWorkout.length > 0 ? (
+          saveLaterWorkout.map((workout: IWorkout) => {
+            return (
+              <SavedTodaysPlan
+                key={workout.id}
+                workout={workout}
+              ></SavedTodaysPlan>
+            );
+          })
+        ) : (
+          <div>
+            <h1>NOTHING HERE YET</h1>
+            <p>Browse the library and add a lift to get today moving.</p>
+          </div>
+        )}
+        </div>
+
+      </div>
+      <div className="text-center m-3" id="saveTodaysPlan">
+        
+
+        <Link href="/workout-details" className="btn btn-primary p-3 mt-3">
+          Go to Workouts
+        </Link>
       </div>
     </div>
   );

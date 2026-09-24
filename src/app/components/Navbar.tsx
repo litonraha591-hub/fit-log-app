@@ -1,10 +1,12 @@
 'use client'
+import { WorkContext } from '@/context/WorkContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useContext } from 'react';
 
 const Navbar = () => {
+    const { savedWorkout, saveLaterWorkout } = useContext(WorkContext);
      const pathname = usePathname();
     return (
       <div className='container mx-auto grid grid-cols-3 items-center bg-black py-3 px-2'>
@@ -18,8 +20,8 @@ const Navbar = () => {
            <Link href='/my-plan' className={pathname === "/my-plan" ? " text-[#C2F800]" : "text-white"}>My Plan</Link>
         </div>
         <div className='flex justify-end gap-2 '>
-            <h1 className='text-white'>Plan</h1>
-            <h1 className='text-white'>Saved</h1>
+            <h1 className='text-white'>Plan <span>{savedWorkout.length}</span></h1>
+            <h1 className='text-white'>Saved <span>{saveLaterWorkout.length}</span></h1>
         </div>
       </div>
     );

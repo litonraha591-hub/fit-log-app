@@ -1,7 +1,14 @@
+"use client";
+import { WorkContext } from "@/context/WorkContext";
+import { IWorkout } from "@/types/workout.types";
+import { discoverValidationDepths } from "next/dist/server/app-render/instant-validation/instant-validation";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
+import SavedTodaysPlan from "../shared/SavedTodaysPlan";
 
 const MyPlanPage = () => {
+  const { savedWorkout } = useContext(WorkContext);
   return (
     <div className="space-y-2">
       <div>
@@ -14,16 +21,29 @@ const MyPlanPage = () => {
         <p>Calories</p>
       </div>
       <div className="grid grid-cols-2 justify-between">
-        <div className="flex gap-2" >
-          <p>Todays Plan</p>
-          <p>Saved</p>
+        <div role="tablist" className="tabs tabs-box">
+          <a role="tab" className="tab">
+            Saved plan
+          </a>
+          <a role="tab" className="tab tab-active">
+            Tab 2
+          </a>
         </div>
         <p>Sort by</p>
       </div>
       <div className="text-center m-3">
-        <h1>NOTHING HERE YET</h1>
-        <p>Browse the library and add a lift to get today moving.</p>
-        <Link href='/workout-details'>Go to Workouts</Link>
+        {savedWorkout.length > 0 ? (
+          savedWorkout.map((workout: IWorkout) => {
+            return <SavedTodaysPlan key={workout.id} workout={workout}></SavedTodaysPlan>
+          })
+        ) : (
+          <div>
+            <h1>NOTHING HERE YET</h1>
+            <p>Browse the library and add a lift to get today moving.</p>
+          </div>
+        )}
+
+        <Link href="/workout-details">Go to Workouts</Link>
       </div>
     </div>
   );

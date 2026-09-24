@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import FooterPage from "./components/FooterPage";
 import WorkoutLibrary from "./workout-library/page";
+import WorkProvider from "@/context/WorkContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,10 +34,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${oswald.variable}  ${geistMono.variable} h-full antialiased`} 
     >
       <body className="min-h-full flex flex-col">
+        <WorkProvider>
+
         <Navbar></Navbar>
         
         {children}
         <FooterPage></FooterPage>
+        </WorkProvider>
 
       </body>
     </html>

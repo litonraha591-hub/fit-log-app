@@ -1,10 +1,18 @@
+
 import BannerPage from "./components/Banner";
+import WorkOutPage from "./workout-details/page";
 
 
-export default function Home() {
+
+
+
+const  Home= ()=> {
+  
   return (
-   <div>
+  <div>
     <BannerPage></BannerPage>
-   </div>
+  <WorkOutPage/>
+  </div>
   );
 }
+export default Home;

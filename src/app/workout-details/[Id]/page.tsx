@@ -17,7 +17,8 @@ const WorkOutPage = async ({ params }: IWorkOutPageProps) => {
   const workout: IWorkout = await res.json();
 
   return (
-    <div className="flex justify-between  container mx-auto gap-[50px] m-4">
+   <div>
+     <div className="flex justify-between  container mx-auto gap-[50px] m-4">
       <div>
         <Image
           src={workout.image}
@@ -81,6 +82,7 @@ const WorkOutPage = async ({ params }: IWorkOutPageProps) => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 

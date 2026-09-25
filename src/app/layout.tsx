@@ -17,10 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 const oswald = Oswald({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-oswald', // Define the custom CSS variable
-  display: 'swap',
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-oswald", // Define the custom CSS variable
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,19 +31,23 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en" 
-      className={`${geistSans.variable} ${oswald.variable}  ${geistMono.variable} h-full antialiased`} 
+      lang="en"
+      className={`${geistSans.variable} ${oswald.variable}  ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <WorkProvider>
+          <Navbar></Navbar>
 
-        <Navbar></Navbar>
-        
-        {children}
-        <FooterPage></FooterPage>
-        <ToastContainer />
+          {children}
+          <FooterPage></FooterPage>
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            newestOnTop
+            pauseOnHover
+            theme="light"
+          />
         </WorkProvider>
-
       </body>
     </html>
   );

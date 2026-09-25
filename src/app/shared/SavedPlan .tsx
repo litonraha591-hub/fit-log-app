@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { WorkContext } from "@/context/WorkContext";
 import { IWorkout } from "@/types/workout.types";
 import Image from "next/image";
@@ -8,24 +8,39 @@ import { FaCheck } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { Bounce, toast } from "react-toastify";
 
-interface ITodaysPlanProps {
-  workout: IWorkout;
+interface SavedPlanProps{
+  workout:IWorkout,
+  
 }
 
-const SavedTodaysPlan = ({ workout }: ITodaysPlanProps) => {
-  const { savedWorkout, setSavedWorkout } = useContext(WorkContext);
+
+
+const SavedPlan = ({ workout}: SavedPlanProps) => {
+
+const {saveLaterWorkout, setSaveLaterWorkout}=useContext(WorkContext)
+  
+const handleSaveWorkout = (workout: IWorkout) => {
+  const alreadyExists = saveLaterWorkout.some(
+    (saved) => saved.id === workout.id
+  );
+
+  if (alreadyExists) {
+    toast.warning("This workout is already in your saved list!");
+    return;
+  }
+
+  setSaveLaterWorkout([...saveLaterWorkout, workout]);
+  toast.success("Workout saved successfully!");
+};
 
   const done = () => {
     toast.success("Mark Successfully!", {
       position: "top-right",
     });
   };
-  const handleRemoveWorkout = () => {
-    const restWorkout = savedWorkout.filter(
-      (savedWorkout: IWorkout) => savedWorkout.id !== workout.id,
-    );
-   
-    setSavedWorkout(restWorkout);
+  const handleRemoveWorkout = ()=>{
+    const restWorkout = saveLaterWorkout.filter((savedWorkout:IWorkout)=> savedWorkout.id !== workout.id)
+    setSaveLaterWorkout(restWorkout)
      toast.warn('Removed workout successfully', {
 position: "top-right",
 autoClose: 5000,
@@ -37,7 +52,10 @@ progress: undefined,
 theme: "light",
 transition: Bounce,
 });
-  };
+      
+  
+  }
+
 
 
   return (
@@ -65,26 +83,17 @@ transition: Bounce,
 
       {/* Actions */}
       <div className="flex items-center gap-3">
-        <Link href={`/workout-details/${workout.id}`}>
-          {" "}
-          <button className="btn btn-accent">View Details</button>
-        </Link>
+      <Link href={`/workout-details/${workout.id}`}>  <button className="btn btn-accent"  >View Details</button></Link>
 
-        <button className="btn btn-accent" onClick={done}>
-          {" "}
-          <FaCheck />
-          Mark as Done
-        </button>
+        <button className="btn btn-accent" onClick={done} > <FaCheck />Mark as Done</button>
 
-        <button
-          className="btn btn-circle btn-ghost"
-          onClick={() => handleRemoveWorkout()}
-        >
-          <IoCloseSharp size={24} />
+        <button className="btn btn-circle btn-ghost" onClick={()=>handleRemoveWorkout()}  >
+          <IoCloseSharp size={24}  />
+          
         </button>
       </div>
     </div>
   );
 };
 
-export default SavedTodaysPlan;
+export default SavedPlan;

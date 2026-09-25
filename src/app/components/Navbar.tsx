@@ -20,8 +20,8 @@ const Navbar = () => {
            <Link href='/my-plan' className={pathname === "/my-plan" ? " text-[#C2F800]" : "text-white"}>My Plan</Link>
         </div>
         <div className='flex justify-end gap-2 '>
-            <h1 className='text-white'>Plan <span>{savedWorkout.length}</span></h1>
-            <h1 className='text-white'>Saved <span>{saveLaterWorkout.length}</span></h1>
+            <Link className='text-white' href='/my-plan'>Plan <span>{savedWorkout.length}</span></Link>
+            <Link href='/my-plan' className='text-white'>Saved <span>{saveLaterWorkout.length}</span></Link>
         </div>
       </div>
     );

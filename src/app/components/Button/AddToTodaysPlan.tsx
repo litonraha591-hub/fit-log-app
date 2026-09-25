@@ -4,17 +4,20 @@ import { WorkContext } from '@/context/WorkContext';
 import { IWorkout } from '@/types/workout.types';
 import React, { useContext } from 'react';
 
+
 const AddToTodaysPlan = ({workout}:{workout:IWorkout}) => {
-    const {savedWorkout, setSavedWorkout} = useContext(WorkContext)
+    
+    const { addSaveWorkout } = useContext(WorkContext);
+
+const handleSave = () => {
+  addSaveWorkout(workout);
+};
    
 
-    const handleAddToTodaysPlan=(()=>{
-setSavedWorkout([...savedWorkout, workout])
-console.log(savedWorkout, setSavedWorkout, "data");
-    })
+
     return (
         <div>
-              <button className="btn btn-primary" onClick={()=>handleAddToTodaysPlan()}>Add to today`s plan</button>
+              <button className="btn btn-primary" onClick={handleSave}>Add to today`s plan</button>
         </div>
     );
 };

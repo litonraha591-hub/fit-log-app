@@ -9,47 +9,51 @@ import SavedPlan from "../shared/SavedPlan ";
 
 const MyPlanPage = () => {
   const { savedWorkout, saveLaterWorkout } = useContext(WorkContext);
+  const [sortBy, setSortBy] = useState<"duration" | "calories" | "rating">(
+    "rating",
+  );
+const sorWorkout = (workout: IWorkout[]) => {
+  const sortedWorkout = [...workout];
+
+  if (sortBy === "duration") {
+    sortedWorkout.sort((a, b) => a.duration - b.duration);
+  } else if (sortBy === "calories") {
+    sortedWorkout.sort((a, b) => a.caloriesBurned - b.caloriesBurned);
+  } else if (sortBy === "rating") {
+    sortedWorkout.sort((a, b) => a.rating - b.rating);
+  }
+
+  return sortedWorkout;
+};
 
 
+const sortSavedWorkout = sorWorkout(savedWorkout)
+const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
 
   const [activeTab, setActiveTab] = useState<"today" | "saved">("today");
-const uniqueSavedWorkout = useMemo(
-  () =>
-    savedWorkout.filter(
-      (workout, index, self) =>
-        index === self.findIndex((w) => w.id === workout.id)
-    ),
-  [savedWorkout]
-
-  
-);
-
-const uniqueSaveLaterWorkout = useMemo(
-  () =>
-    saveLaterWorkout.filter(
-      (workout, index, self) =>
-        index === self.findIndex((w) => w.id === workout.id)
-    ),
-  [saveLaterWorkout]
-);
-
+ 
   const excerciseCount =
-    activeTab === "today" ? uniqueSavedWorkout.length : uniqueSaveLaterWorkout.length;
+    activeTab === "today"
+      ? savedWorkout.length
+      : saveLaterWorkout.length;
 
   const totalMinutes =
     activeTab === "today"
-      ? uniqueSavedWorkout.reduce((acc, workout) => acc + (workout.duration || 0), 0)
-      : uniqueSaveLaterWorkout.reduce(
+      ? savedWorkout.reduce(
+          (acc, workout) => acc + (workout.duration || 0),
+          0,
+        )
+      : saveLaterWorkout.reduce(
           (acc, workout) => acc + (workout.duration || 0),
           0,
         );
   const totalCalories =
     activeTab === "today"
-      ? uniqueSavedWorkout.reduce(
+      ? savedWorkout.reduce(
           (acc, workout) => acc + (workout.caloriesBurned || 0),
           0,
         )
-      : uniqueSaveLaterWorkout.reduce(
+      : saveLaterWorkout.reduce(
           (acc, workout) => acc + (workout.caloriesBurned || 0),
           0,
         );
@@ -61,16 +65,18 @@ const uniqueSaveLaterWorkout = useMemo(
         <p>Cap of five lifts for today. Finish them, then load more.</p>
       </div>
       <div className="grid grid-cols-3 justify-center items-center text-center">
-        <div><p>Excercises </p>
-        <p>{excerciseCount}</p></div>
-       <div>
-         <p>Minutes </p>
-        <p>{totalMinutes}</p>
-       </div>
-       <div>
-         <p>Calories </p>
-        <p>{totalCalories}</p>
-       </div>
+        <div>
+          <p>Excercises </p>
+          <p>{excerciseCount}</p>
+        </div>
+        <div>
+          <p>Minutes </p>
+          <p>{totalMinutes}</p>
+        </div>
+        <div>
+          <p>Calories </p>
+          <p>{totalCalories}</p>
+        </div>
       </div>
 
       {/* name of each tab group should be unique */}
@@ -85,8 +91,8 @@ const uniqueSaveLaterWorkout = useMemo(
           onChange={() => setActiveTab("today")}
         />
         <div className="tab-content border-base-300 bg-base-100 p-10 gap-3">
-          {uniqueSavedWorkout.length > 0 ? (
-            uniqueSavedWorkout.map((workout: IWorkout) => {
+          {sortSavedWorkout.length > 0 ? (
+            sortSavedWorkout.map((workout: IWorkout) => {
               return (
                 <SavedTodaysPlan
                   key={workout.id}
@@ -110,8 +116,8 @@ const uniqueSaveLaterWorkout = useMemo(
           onChange={() => setActiveTab("saved")}
         />
         <div className="tab-content border-base-300 bg-base-100 p-10 ">
-          {uniqueSaveLaterWorkout.length > 0 ? (
-            uniqueSaveLaterWorkout.map((workout: IWorkout) => {
+          {sortSavedLaterWorkout.length > 0 ? (
+            sortSavedLaterWorkout.map((workout: IWorkout) => {
               return <SavedPlan key={workout.id} workout={workout}></SavedPlan>;
             })
           ) : (
@@ -122,11 +128,18 @@ const uniqueSaveLaterWorkout = useMemo(
           )}
         </div>
         <div className="flex">
-          <select defaultValue="Color scheme" className="select select-accent">
-            <option disabled={true}>Color scheme</option>
-            <option>Light mode</option>
-            <option>Dark mode</option>
-            <option>System</option>
+          <select
+            defaultValue="Sort by"
+            className="select select-accent"
+            value={sortBy}
+            onChange={(e) =>
+              setSortBy(e.target.value as "duration" | "calories" | "rating")
+            }
+          >
+            <option disabled={true}>Sort by</option>
+            <option value={"duration"}>Duration</option>
+            <option value={"calories"}>Calories</option>
+            <option value={"rating"}>Rating</option>
           </select>
         </div>
       </div>

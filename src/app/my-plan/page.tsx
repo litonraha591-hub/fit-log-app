@@ -3,21 +3,40 @@ import { WorkContext } from "@/context/WorkContext";
 import { IWorkout } from "@/types/workout.types";
 
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SavedTodaysPlan from "../shared/SavedTodaysPlan";
 
 const MyPlanPage = () => {
   const { savedWorkout, saveLaterWorkout } = useContext(WorkContext);
+  const [activeTab, setActiveTab] = useState<"today" | "saved">("today");
+  const excerciseCount =
+    activeTab === "today" ? savedWorkout.length : saveLaterWorkout.length;
+
+  const totalMinutes =
+    activeTab === "today"
+      ? savedWorkout.reduce((acc, workout) => acc + (workout.duration || 0), 0)
+      : saveLaterWorkout.reduce(
+          (acc, workout) => acc + (workout.duration || 0),
+          0,
+        );
+  const totalCalories = activeTab ==="today"?(savedWorkout.reduce(
+    (acc, workout) => acc + (workout.caloriesBurned || 0),
+    0,
+  )):(saveLaterWorkout.reduce(
+    (acc, workout) => acc + (workout.caloriesBurned || 0),
+    0,
+  ));
+
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 container mx-auto">
       <div>
         <h1>MY PLAN</h1>
         <p>Cap of five lifts for today. Finish them, then load more.</p>
       </div>
       <div className="grid grid-cols-3 justify-center">
-        <p>Excercises</p>
-        <p>Minutes</p>
-        <p>Calories</p>
+        <p>Excercises {excerciseCount}</p>
+        <p>Minutes{totalMinutes} </p>
+        <p>Calories {totalCalories}</p>
       </div>
       {/* name of each tab group should be unique */}
       {/* name of each tab group should be unique */}
@@ -27,23 +46,25 @@ const MyPlanPage = () => {
           name="my_tabs_2"
           className="tab"
           aria-label="Today`s Plan"
+          defaultChecked
+          onChange={() => setActiveTab("today")}
         />
-        <div className="tab-content border-base-300 bg-base-100 p-10">
-         {savedWorkout.length > 0 ? (
-          savedWorkout.map((workout: IWorkout) => {
-            return (
-              <SavedTodaysPlan
-                key={workout.id}
-                workout={workout}
-              ></SavedTodaysPlan>
-            );
-          })
-        ) : (
-          <div>
-            <h1>NOTHING HERE YET</h1>
-            <p>Browse the library and add a lift to get today moving.</p>
-          </div>
-        )}
+        <div className="tab-content border-base-300 bg-base-100 p-10 gap-3">
+          {savedWorkout.length > 0 ? (
+            savedWorkout.map((workout: IWorkout) => {
+              return (
+                <SavedTodaysPlan
+                  key={workout.id}
+                  workout={workout}
+                ></SavedTodaysPlan>
+              );
+            })
+          ) : (
+            <div>
+              <h1>NOTHING HERE YET</h1>
+              <p>Browse the library and add a lift to get today moving.</p>
+            </div>
+          )}
         </div>
 
         <input
@@ -51,31 +72,28 @@ const MyPlanPage = () => {
           name="my_tabs_2"
           className="tab"
           aria-label="Saved"
-          defaultChecked
+          onChange={() => setActiveTab("saved")}
         />
         <div className="tab-content border-base-300 bg-base-100 p-10 ">
-         {saveLaterWorkout.length > 0 ? (
-          saveLaterWorkout.map((workout: IWorkout) => {
-            return (
-              <SavedTodaysPlan
-                key={workout.id}
-                workout={workout}
-              ></SavedTodaysPlan>
-            );
-          })
-        ) : (
-          <div>
-            <h1>NOTHING HERE YET</h1>
-            <p>Browse the library and add a lift to get today moving.</p>
-          </div>
-        )}
+          {saveLaterWorkout.length > 0 ? (
+            saveLaterWorkout.map((workout: IWorkout) => {
+              return (
+                <SavedTodaysPlan
+                  key={workout.id}
+                  workout={workout}
+                ></SavedTodaysPlan>
+              );
+            })
+          ) : (
+            <div>
+              <h1>NOTHING HERE YET</h1>
+              <p>Browse the library and add a lift to get today moving.</p>
+            </div>
+          )}
         </div>
-
       </div>
       <div className="text-center m-3" id="saveTodaysPlan">
-        
-
-        <Link href="/workout-details" className="btn btn-primary p-3 mt-3">
+        <Link href="/" className="btn btn-primary p-3 mt-3">
           Go to Workouts
         </Link>
       </div>

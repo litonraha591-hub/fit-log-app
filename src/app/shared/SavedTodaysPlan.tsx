@@ -1,9 +1,18 @@
+'use client'
 import { IWorkout } from "@/types/workout.types";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { FaCheck } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const SavedTodaysPlan = ({ workout }: { workout: IWorkout }) => {
+  const done = () => {
+    toast.success("Mark Successfully!", {
+      position: "top-right",
+    });
+  };
   return (
     <div className="container mx-auto flex items-center justify-between gap-6 rounded-xl bg-white p-4 shadow-md">
       {/* Workout Information */}
@@ -29,9 +38,9 @@ const SavedTodaysPlan = ({ workout }: { workout: IWorkout }) => {
 
       {/* Actions */}
       <div className="flex items-center gap-3">
-        <button className="btn btn-accent" >View Details</button>
+      <Link href={`/workout-details/${workout.id}`}>  <button className="btn btn-accent"  >View Details</button></Link>
 
-        <button className="btn btn-accent">Mark as Done</button>
+        <button className="btn btn-accent" onClick={done} > <FaCheck />Mark as Done</button>
 
         <button className="btn btn-circle btn-ghost">
           <IoCloseSharp size={24} />

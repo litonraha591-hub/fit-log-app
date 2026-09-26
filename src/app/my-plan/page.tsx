@@ -129,7 +129,7 @@ const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
             </div>
           )}
         </div>
-        <div className="w-full sm:w-auto">
+        <div className="ml-auto w-full sm:w-auto">
           <select
             defaultValue="Sort by"
             className="select select-accent w-full sm:w-44 bg-gray-900 border-gray-700 text-white"

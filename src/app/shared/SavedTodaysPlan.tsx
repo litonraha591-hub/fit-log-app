@@ -43,7 +43,7 @@ transition: Bounce,
   return (
     <div className="container mx-auto rounded-xl bg-gray-900 p-4  shadow-md">
       <div className=" flex flex-col items-center  gap-5    md:grid md:grid-cols-2  md:items-center ">
-      {/* Workout Information */}
+   
       <div className="flex items-center gap-4">
         <Image
           src={workout.image}

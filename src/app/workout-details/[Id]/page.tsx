@@ -17,72 +17,82 @@ const WorkOutPage = async ({ params }: IWorkOutPageProps) => {
   const workout: IWorkout = await res.json();
 
   return (
-   <div>
-     <div className="flex justify-between  container mx-auto gap-[50px] m-4">
-      <div>
+  <div className="bg-black text-white">
+     <div className="container mx-auto px-4 py-8">
+     <div className="flex  flex-col gap-8 md:flex-row md:items-start">
+      <div className="w-full md:w-1/2">
         <Image
           src={workout.image}
           height={400}
           width={600}
           alt="workoutDetailsImage"
+          className="h-auto w-full rounded-lg bg-gray-100 object-contain"
         ></Image>
       </div>
-      <div>
-        <h1>{workout.name}</h1>
-        <p>{workout.description}</p>
-        <div className="flex gap-3">
+      <div className="w-full space-y-5 md:w-1/2">
+        <h1 className="text-3xl font-bold text-white" >{workout.name}</h1>
+        <p className=" text-gray-400">{workout.description}</p>
+        <div className="flex flex-wrap gap-2 text-black">
           {workout.muscleGroups.map((muscle, ind) => (
             <span
               key={ind}
-              className="founded-full bg-gray-200 px-3 py-1 mt-1 border-none rounded-[3px]"
+              className="rounded-full bg-gray-200 px-3 py-1 mt-1 border-none text-sm "
             >
               {" "}
               {muscle}
             </span>
           ))}
         </div>
-        <div>
+        <div className="space-y-3 rounded-lg bg-gray-900 p-4">
           <div className="flex justify-between">
-            <h1>EQUIPMENT</h1>
+            <h1 className="font-semibold">EQUIPMENT</h1>
             <h1> {workout.equipment}</h1>
           </div>
           <div className="flex justify-between">
-            <h1>DIFFICULTY</h1>
+            <h1 className="font-semibold">DIFFICULTY</h1>
             <h1> {workout.difficulty}</h1>
           </div>
           <div className="flex justify-between">
-            <h1> SETS</h1>
+            <h1 className="font-semibold"> SETS</h1>
             <h1> {workout.sets}</h1>
           </div>
           <div className="flex justify-between">
-            <h1>REPS</h1>
+            <h1 className="font-semibold">REPS</h1>
             <h1> {workout.reps}</h1>
           </div>
           <div className="flex justify-between">
-            <h1> DURATION</h1>
+            <h1 className="font-semibold"> DURATION</h1>
             <h1> {workout.duration}</h1>
           </div>
           <div className="flex justify-between">
-            <h1> CALORIESBURNED</h1>
+            <h1 className="font-semibold"> CALORIESBURNED</h1>
             <h1> {workout.caloriesBurned}</h1>
           </div>
           <div className="flex justify-between">
-            <h1>RATING</h1>
+            <h1 className="font-semibold">RATING</h1>
             <h1> {workout.rating}</h1>
           </div>
         </div>
         <div>
-          <p> 1. {workout.instructions[0]} </p>
-          <p> 2. {workout.instructions[1]}</p>
-          <p>3. {workout.instructions[2]}</p>
+          <h1 className="mb-3 text-xl font-bold">Instructions</h1>
+          <div className="space-y-2">
+          {
+            workout.instructions.map((step,ind)=>{
+             return( <p key={ind}>
+                <span className="font-semibold">{ind+1}.</span> {step}
+              </p>)
+            })
+          }
+          </div>
         </div>
-        <div className="my-5 flex gap-4">
+        <div className="flex flex-col  gap-3 sm:flex-row">
         <AddToTodaysPlan workout={workout}></AddToTodaysPlan>
           <SavedForLater workout={workout}></SavedForLater>
         </div>
       </div>
     </div>
    </div>
+  </div>
   );
 };
 

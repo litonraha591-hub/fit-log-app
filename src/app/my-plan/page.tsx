@@ -59,38 +59,40 @@ const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
         );
 
   return (
-    <div className="space-y-2 container mx-auto">
-      <div>
-        <h1>MY PLAN</h1>
-        <p>Cap of five lifts for today. Finish them, then load more.</p>
+    <div className="bg-black text-white min-h-screen">
+      <div className=" container mx-auto px-4 py-6 space-y-6">
+      <div className="text-center md:text-left">
+        <h1 className="text-3xl font-bold">MY PLAN</h1>
+        <p className="text-gray-500 mt-2">Cap of five lifts for today. Finish them, then load more.</p>
       </div>
-      <div className="grid grid-cols-3 justify-center items-center text-center">
-        <div>
-          <p>Excercises </p>
-          <p>{excerciseCount}</p>
+      <div className=" bg-gray-900 grid grid-cols-3 gap-3 rounded-xl  text-center ">
+        <div className=" p-4">
+          <p className="text-sm text-gray-500">Excercises </p>
+          <p className="text-2xl font-bold">{excerciseCount}</p>
         </div>
-        <div>
-          <p>Minutes </p>
-          <p>{totalMinutes}</p>
+        <div className=" p-4">
+          <p className="text-sm text-gray-500">Minutes </p>
+          <p className="text-2xl font-bold">{totalMinutes}</p>
         </div>
-        <div>
-          <p>Calories </p>
-          <p>{totalCalories}</p>
+        <div className=" p-4">
+          <p className="text-sm text-gray-500"> Calories </p>
+          <p className="text-2xl font-bold">{totalCalories}</p>
         </div>
       </div>
 
-      {/* name of each tab group should be unique */}
-      {/* name of each tab group should be unique */}
-      <div className="tabs tabs-border flex ">
+      
+    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="tabs tabs-border ">
         <input
           type="radio"
           name="my_tabs_2"
-          className="tab"
+          className="tab text-white"
+          
           aria-label="Today`s Plan"
           defaultChecked
           onChange={() => setActiveTab("today")}
         />
-        <div className="tab-content border-base-300 bg-base-100 p-10 gap-3">
+        <div className="tab-content mt-4 rounded-xl border border-gray-800 bg-gray-900 p-4 md:p-6 space-y-3">
           {sortSavedWorkout.length > 0 ? (
             sortSavedWorkout.map((workout: IWorkout) => {
               return (
@@ -101,9 +103,9 @@ const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
               );
             })
           ) : (
-            <div>
-              <h1>NOTHING HERE YET</h1>
-              <p>Browse the library and add a lift to get today moving.</p>
+            <div className="py-8 text-center">
+              <h1 className="text-xl font-bold">NOTHING HERE YET</h1>
+              <p className="text-gray-400 mt-2">Browse the library and add a lift to get today moving.</p>
             </div>
           )}
         </div>
@@ -111,26 +113,26 @@ const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
         <input
           type="radio"
           name="my_tabs_2"
-          className="tab"
+          className="tab text-white"
           aria-label="Saved"
           onChange={() => setActiveTab("saved")}
         />
-        <div className="tab-content border-base-300 bg-base-100 p-10 ">
+        <div className="tab-content mt-4 rounded-xl border border-gray-800 bg-gray-900 p-4 md:p-6 space-y-3">
           {sortSavedLaterWorkout.length > 0 ? (
             sortSavedLaterWorkout.map((workout: IWorkout) => {
               return <SavedPlan key={workout.id} workout={workout}></SavedPlan>;
             })
           ) : (
-            <div>
-              <h1>NOTHING HERE YET</h1>
-              <p>Browse the library and add a lift to get today moving.</p>
+            <div className="py-8 text-center">
+              <h1 className="text-xl font-bold">NOTHING HERE YET</h1>
+              <p className="text-gray-400 mt-2">Browse the library and add a lift to get today moving.</p>
             </div>
           )}
         </div>
-        <div className="flex">
+        <div className="w-full sm:w-auto">
           <select
             defaultValue="Sort by"
-            className="select select-accent"
+            className="select select-accent w-full sm:w-44 bg-gray-900 border-gray-700 text-white"
             value={sortBy}
             onChange={(e) =>
               setSortBy(e.target.value as "duration" | "calories" | "rating")
@@ -143,11 +145,13 @@ const sortSavedLaterWorkout= sorWorkout(saveLaterWorkout)
           </select>
         </div>
       </div>
-      <div className="text-center m-3" id="saveTodaysPlan">
-        <Link href="/" className="btn btn-primary p-3 mt-3">
+    </div>
+      <div className="text-center p-2" id="saveTodaysPlan">
+        <Link href="/" className="nline-flex w-full sm:w-auto items-center justify-center rounded-lg bg-[#C2F800] px-6 py-3 font-semibold text-black transition hover:opacity-90">
           Go to Workouts
         </Link>
       </div>
+    </div>
     </div>
   );
 };

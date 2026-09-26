@@ -59,13 +59,14 @@ transition: Bounce,
 
 
   return (
-    <div className="container mx-auto flex items-center justify-between gap-6 rounded-xl bg-white p-4 shadow-md">
+    <div className="bg-gray-900" >
+      <div className="container mx-auto  flex flex-col gap-2  items-center md:grid grid-cols-3 md:justify-between md:items-center">
       {/* Workout Information */}
       <div className="flex items-center gap-4">
         <Image
           src={workout.image}
-          height={80}
-          width={120}
+          height={100}
+          width={150}
           alt={`${workout.name} image`}
           className="h-20 w-30 rounded-lg object-cover"
         />
@@ -82,16 +83,17 @@ transition: Bounce,
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 ">
       <Link href={`/workout-details/${workout.id}`}>  <button className="btn btn-accent"  >View Details</button></Link>
 
         <button className="btn btn-accent" onClick={done} > <FaCheck />Mark as Done</button>
 
         <button className="btn btn-circle btn-ghost" onClick={()=>handleRemoveWorkout()}  >
-          <IoCloseSharp size={24}  />
+          <IoCloseSharp size={24} className="text-white"  />
           
         </button>
       </div>
+    </div>
     </div>
   );
 };

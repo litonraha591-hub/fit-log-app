@@ -65,7 +65,7 @@ transition: Bounce,
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col  gap-3 sm:flex-row sm:flex-wrap sm:justify-end">
+      <div className="flex flex-col  gap-3 sm:flex-row sm:flex-wrap sm:justify-end sm:items-center">
         <Link href={`/workout-details/${workout.id}`}>
           {" "}
           <button className="btn btn-accent w-full sm:w-auto">View Details</button>
@@ -78,7 +78,7 @@ transition: Bounce,
         </button>
 
         <button
-          className="btn btn-circle btn-ghost self-end sm:self-auto"
+          className="btn btn-circle btn-ghost self-end sm:self-auto  "
           onClick={() => handleRemoveWorkout()}
         >
           <IoCloseSharp size={24}  className="text-white"/>

@@ -6,7 +6,7 @@ const FooterPage = () => {
     <div className="bg-gray-800 text-white">
       <div className="container mx-auto grid grid-cols-1 items-center gap-3 px-4 py-4 md:grid-cols-2">
         <div className="flex items-center justify-center gap-2 md:justify-start">
-          <Image src="/SVG.png" height={18} width={18} alt="footerLogo"></Image>
+          <Image src="/logo.png" height={18} width={18} alt="footerLogo"></Image>
           <h1 className="font-bold">FITLOG</h1>
         </div>
         <div className="text-center md:text-right">

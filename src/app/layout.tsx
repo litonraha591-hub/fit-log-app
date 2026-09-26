@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import FooterPage from "./components/FooterPage";
-import WorkoutLibrary from "./workout-library/page";
+
 import WorkProvider from "@/context/WorkContext";
 import { ToastContainer } from "react-toastify";
 

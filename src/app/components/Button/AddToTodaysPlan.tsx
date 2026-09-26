@@ -3,6 +3,7 @@
 import { WorkContext } from '@/context/WorkContext';
 import { IWorkout } from '@/types/workout.types';
 import React, { useContext } from 'react';
+import { FaPlus } from 'react-icons/fa';
 
 
 const AddToTodaysPlan = ({workout}:{workout:IWorkout}) => {
@@ -17,7 +18,9 @@ const handleSave = () => {
 
     return (
         <div>
-              <button className="btn btn-primary" onClick={handleSave}>Add to today`s plan</button>
+              <button className="btn btn-primary" onClick={handleSave}>
+                <FaPlus />
+                Add to today`s plan</button>
         </div>
     );
 };

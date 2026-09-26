@@ -3,6 +3,7 @@
 import { WorkContext } from '@/context/WorkContext';
 import { IWorkout } from '@/types/workout.types';
 import React, { useContext } from 'react';
+import { FaRegBookmark } from 'react-icons/fa';
 
 
 const AddToTodaysPlan = ({workout}:{workout:IWorkout}) => {
@@ -17,7 +18,9 @@ const handleSave = () => {
  
     return (
         <div>
-              <button className="btn btn-secondary" onClick={handleSave}>Save For Later</button>
+              <button className="btn btn-secondary" onClick={handleSave}>
+                    <FaRegBookmark />
+                Save For Later</button>
         </div>
     );
 };

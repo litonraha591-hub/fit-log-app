@@ -52,7 +52,7 @@ const Navbar = () => {
           </Link>
           <Link href="/my-plan" className="text-gray-400 font-bold">
             Saved{" "}
-            <span className="bg-[#C2F800] text-black px-1.5 py-0.5 rounded-full">
+            <span className=" border text-white px-1.5 py-0.5 rounded-full">
               {saveLaterWorkout.length}
             </span>
           </Link>

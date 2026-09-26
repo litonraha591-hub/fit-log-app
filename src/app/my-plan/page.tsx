@@ -74,7 +74,7 @@ const MyPlanPage = () => {
           <div className="rounded-xl bg-gray-900 p-4 text-center transition hover:bg-gray-800">
             <p className="text-xs md:text-sm text-gray-400">Exercises</p>
             <p className="mt-1 text-xl md:text-3xl font-bold text-[#C2F800]">
-              {exerciseCount}
+              {exerciseCount} 
             </p>
           </div>
 

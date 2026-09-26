@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
@@ -33,4 +33,23 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details. -->
+ project name, description, technologies used, and features(minimum 5)
+
+ #Project Name: Fit Log
+ #Description: This is a web application that is used to workout library and gym planning.Here two pages are shown and we create today`s plan and saved any plan in it. Here also count calories, minutes also.
+
+#Technologies used: 
+    1. Next.js
+    2. React
+    3. Typescript
+    4. Tailwind CSS
+    5. DaisyUI
+    6. React Icon
+
+#Features:
+    1. Daily workout plan 
+    2. Save workouts for later
+    3. Sort saved and daily plan by duration, calories and ratings
+    4. Marks workouts as completed
+    5. Real time workout statistics display
